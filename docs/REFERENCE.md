@@ -10,8 +10,8 @@ migration details, test semantics, technical contracts, and limitations.
 - The `link:` (local checkout) and `github:` (commit-pinned, tested at GitHub commit
   `37553cd28e3e257e2c952093d54c1dafa8f9ddec`) source acquisitions were
   tested in isolated native rc3 profiles, per the install-sources smoke result. The
-  tarball route was tested by the real-host integration suite. No public GitHub release
-  asset or npm package exists yet.
+  tarball route was tested by the real-host integration suite. The npm package and the
+  GitHub prerelease `.tgz` asset are prepared for publication; see Install below.
 - The screenshots demonstrate the actual plugin components on fixture (demonstration) data.
 - The final completed real-profile history dashboard has not been visually verified.
 
@@ -61,21 +61,29 @@ data rendered through the actual plugin components](../screenshots/dashboard.jpg
   adapter calls them, it does not restate them.
 - This adapter's own source repository: <https://github.com/KB1SLN-Labs/dsh-ponytail>
   (the `repository` field in `package.json` points there; upstream Ponytail remains the
-  attribution source above). **Neither npm packages nor packaged GitHub releases have
-  been published yet** — no `.tgz` is attached anywhere, and nothing has been published
-  to npm or any community registry. Build the tarball from source (see Install) until
-  releases exist.
+  attribution source above). Published names: npm package
+  **`@kb1slnlabs/dsh-ponytail`** (npm scope `kb1slnlabs`, separate from the GitHub org
+  `KB1SLN-Labs`) and a GitHub **prerelease** whose asset basename is fixed at
+  **`kb1slnlabs-dsh-ponytail.tgz`**.
 
 ## Install (portable — nothing happens automatically)
 
-Two install routes exist; pick the one that matches how your DSH profile is managed.
-Either way, **put the `.tgz` in a stable folder first** (somewhere that will not be
-cleaned up), and **close any idle DSH process before installing and restart it after**.
+Pick one of four source forms; all of them are ordinary `dsh plugin add` arguments.
+Either way, if you use the tarball form, **put the `.tgz` in a stable folder first**
+(somewhere that will not be cleaned up), and **close any idle DSH process before
+installing and restart it after**.
 
-The tarball name for this release candidate is
-`kb1slnlabs-dsh-ponytail-5.3.3-dsh.5.tgz`. No packaged download is attached publicly yet,
-so build it from source — plain JavaScript, so **no `npm install` is needed merely to pack
-it**:
+- npm (recommended): `@kb1slnlabs/dsh-ponytail`, optionally pinned as
+  `@kb1slnlabs/dsh-ponytail@5.3.3-dsh.5`. A bare package name resolves to this version,
+  because the install publishes it with the `latest` dist-tag explicitly set.
+- GitHub prerelease tarball (version-pinned URL — a "latest" link skips prereleases):
+  <https://github.com/KB1SLN-Labs/dsh-ponytail/releases/download/v5.3.3-dsh.5/kb1slnlabs-dsh-ponytail.tgz>
+  The asset basename is fixed at `kb1slnlabs-dsh-ponytail.tgz`.
+- GitHub source tree: `github:KB1SLN-Labs/dsh-ponytail`, append `#<commit>` to pin.
+- Local checkout (development): `link:<path to checkout>`.
+
+To build the same tarball from source instead of downloading it — plain JavaScript, so
+**no `npm install` is needed merely to pack it**:
 
 ```powershell
 git clone https://github.com/KB1SLN-Labs/dsh-ponytail.git
@@ -84,8 +92,7 @@ npm pack --pack-destination ..     # produces ../kb1slnlabs-dsh-ponytail-5.3.3-d
 ```
 
 Use a stable output location for `--pack-destination` — the folder you install the
-generated tarball from must survive cleanup, and both install routes below take a
-`file:` path to it. Packaged releases and npm installation are not available yet.
+tarball from must survive cleanup, and the `file:` routes below take a path to it.
 
 ### Desktop app — bundled desktop CLI (supported)
 
@@ -96,8 +103,12 @@ the desktop profile**. Windows PowerShell:
 
 ```powershell
 $dshDesktop = Join-Path $env:LOCALAPPDATA 'Programs\DeepSeek Harness\resources\runtime\cli\bin\dsh.cmd'
-& $dshDesktop plugin --profile desktop add 'file:C:/path/to/kb1slnlabs-dsh-ponytail-5.3.3-dsh.5.tgz'
+& $dshDesktop plugin --profile desktop add @kb1slnlabs/dsh-ponytail
 ```
+
+The bundled CLI accepts the same alternate source forms listed above — a
+`file:C:/path/to/kb1slnlabs-dsh-ponytail.tgz` path, `github:KB1SLN-Labs/dsh-ponytail`,
+or `link:<checkout>`.
 
 `--profile desktop` works with the bundled CLI for `add` / `remove`; note that
 `--profile desktop --dump-config` is **intentionally refused even for the bundled CLI**,
@@ -110,10 +121,11 @@ it; this reference does not assume a UI capability it cannot verify.
 
 ### CLI-managed profiles — ordinary `dsh plugin`
 
-For profiles you manage from the CLI, use the normal command:
+For profiles you manage from the CLI, use the normal command with any source form:
 
 ```powershell
-dsh plugin --profile myprofile add file:C:/path/to/kb1slnlabs-dsh-ponytail-5.3.3-dsh.5.tgz
+dsh plugin --profile myprofile add @kb1slnlabs/dsh-ponytail
+dsh plugin --profile myprofile add file:C:/path/to/kb1slnlabs-dsh-ponytail.tgz
 ```
 
 DSH profiles manage plugins with pnpm under the hood: `dsh plugin` forwards `add file:...`

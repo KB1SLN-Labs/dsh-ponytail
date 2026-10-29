@@ -27,7 +27,7 @@ dsh plugin --profile web add "link:$PWD"
 
 The plugin stays linked to your checkout; edits load on the next start.
 
-**Option 2 — GitHub (recommended).** Installs from this repository:
+**Option 2 — GitHub source.** Installs from this repository's source tree:
 
 ```powershell
 dsh plugin --profile web add github:KB1SLN-Labs/dsh-ponytail
@@ -35,32 +35,40 @@ dsh plugin --profile web add github:KB1SLN-Labs/dsh-ponytail
 
 Append `#<commit>` to pin a version.
 
-**Option 3 — Tarball.** Build the package from a checkout, then install the file:
+**Option 3 — Release tarball.** Download the packaged file and install it:
 
 ```powershell
-npm pack --pack-destination ..
-dsh plugin --profile web add file:../kb1slnlabs-dsh-ponytail-5.3.3-dsh.5.tgz
+# https://github.com/KB1SLN-Labs/dsh-ponytail/releases/download/v5.3.3-dsh.5/kb1slnlabs-dsh-ponytail.tgz
+dsh plugin --profile web add file:./kb1slnlabs-dsh-ponytail.tgz
 ```
 
-The package is plain JavaScript, so `npm pack` needs no `npm install` first. Keep
-the tarball in a stable folder that will not be deleted — you need it again for
-reinstall or upgrade. There is no GitHub release download published yet, so build
-the tarball yourself as shown.
+Save the tarball in a stable folder that will not be deleted — you need it again for
+reinstall or upgrade. The URL is version-pinned on purpose: this release is a
+prerelease, so a "latest" download link would not resolve to it. To build the same
+tarball from a checkout instead, see [Development](#development); the package is plain
+JavaScript, so `npm pack` needs no `npm install` first.
 
-**Option 4 — npm.** Not published yet. The package will be
-`@kb1slnlabs/dsh-ponytail`, but there is no runnable npm install command until it
-exists. Use Option 2 or 3 for now.
+**Option 4 — npm (recommended).** Installs the published package:
+
+```powershell
+dsh plugin --profile web add @kb1slnlabs/dsh-ponytail
+```
+
+Append `@5.3.3-dsh.5` to pin this version.
 
 ### Desktop app
 
 The desktop app ships its own CLI. An older globally installed CLI refuses the
-reserved `desktop` profile; the bundled one works. Use the same available sources with
-the bundled CLI and the `desktop` profile:
+reserved `desktop` profile; the bundled one works. Use the bundled CLI with the
+`desktop` profile and the ordinary install:
 
 ```powershell
 $dshDesktop = Join-Path $env:LOCALAPPDATA 'Programs\DeepSeek Harness\resources\runtime\cli\bin\dsh.cmd'
-& $dshDesktop plugin --profile desktop add github:KB1SLN-Labs/dsh-ponytail
+& $dshDesktop plugin --profile desktop add @kb1slnlabs/dsh-ponytail
 ```
+
+The bundled CLI supports the same alternate sources shown above — `github:`, a
+`file:` tarball path, or a local `link:` checkout.
 
 Restart DSH, then open **Settings → Plugins → Ponytail**. Choose a default mode (for
 example, `ultra`) and save. The package default is `full`. For details on profile
