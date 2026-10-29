@@ -1,0 +1,9 @@
+# @kb1slnlabs/dsh-ponytail — bundle patch layer.
+#
+# One row, no config: every setting has a default (defaultMode: inherit →
+# PONYTAIL_DEFAULT_MODE env var, then the upstream ponytail config file, then
+# "full"). Override by restating `config` on this row id in a later patch layer
+# (e.g. the profile's own cordis.patch.yml).
+- insert:
+    - id: ponytail
+      name: '@kb1slnlabs/dsh-ponytail'

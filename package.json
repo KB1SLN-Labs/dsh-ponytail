@@ -1,0 +1,84 @@
+{
+  "name": "@kb1slnlabs/dsh-ponytail",
+  "version": "5.3.3-dsh.5",
+  "description": "Ponytail 5.3.3 lazy senior dev mode for DeepSeek Harness: always-on minimal-code ruleset, per-session intensity switching, and the six upstream review/audit/debt/gain/help skills",
+  "keywords": [
+    "deepseek", "deepseek-harness", "dsh", "dsh-plugin", "ponytail",
+    "ai-agent", "agent-plugin", "system-prompt", "yagni", "minimal-code"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/KB1SLN-Labs/dsh-ponytail#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KB1SLN-Labs/dsh-ponytail.git"
+  },
+  "bugs": {
+    "url": "https://github.com/KB1SLN-Labs/dsh-ponytail/issues"
+  },
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "metrics.js",
+    "hooks/",
+    "skills/",
+    "benchmarks/",
+    "cordis.patch.yml",
+    "PRODUCT.md",
+    "DESIGN.md",
+    "screenshots/",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node --test \"test/*.test.mjs\""
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-ui-settings",
+        "@deepseek-ai/dsh-client-ui-settings-plugins",
+        "@deepseek-ai/dsh-client-ui-commands",
+        "@deepseek-ai/dsh-client-ui-conversation",
+        "@deepseek-ai/dsh-client-ui-sidebar",
+        "@deepseek-ai/dsh-client-ui-layout",
+        "@deepseek-ai/dsh-client-ui-workspace",
+        "@deepseek-ai/dsh-api-session-controller",
+        "@deepseek-ai/dsh-client-connection"
+      ]
+    }
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "~4.0.5",
+    "@deepseek-ai/dsh-commands": "0.2.1-rc.3",
+    "@deepseek-ai/dsh-llm": "0.2.1-rc.3",
+    "@deepseek-ai/dsh-skill": "0.2.1-rc.3",
+    "@deepseek-ai/dsh-system-prompt": "0.2.1-rc.3",
+    "@deepseek-ai/schemastery": "~3.18.5",
+    "zod": "^4.4.3"
+  },
+  "peerDependenciesMeta": {
+    "@deepseek-ai/cordis": { "optional": true },
+    "@deepseek-ai/dsh-commands": { "optional": true },
+    "@deepseek-ai/dsh-llm": { "optional": true },
+    "@deepseek-ai/dsh-skill": { "optional": true },
+    "@deepseek-ai/dsh-system-prompt": { "optional": true },
+    "@deepseek-ai/schemastery": { "optional": true },
+    "zod": { "optional": true }
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
