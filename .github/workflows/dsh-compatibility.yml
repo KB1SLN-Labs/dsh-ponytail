@@ -13,7 +13,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        dsh-version: ['0.2.1-rc.3', latest]
+        dsh-version: ['0.2.1-rc.3', latest, alpha]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4

@@ -12,7 +12,7 @@ Beta. Host adapter and packaged-plugin tests pass on Windows with DSH 0.2.1-rc.3
 and rc.5; macOS Desktop UI is not yet verified.
 
 Compatibility peers allow DSH `>=0.2.1-rc.3` and `<0.3.0`. CI checks the current
-latest and rc.3 daily, and future prereleases can still break APIs.
+latest, alpha, and rc.3 daily, and future prereleases can still break APIs.
 
 ## Install
 

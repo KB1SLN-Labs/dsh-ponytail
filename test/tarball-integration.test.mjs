@@ -68,7 +68,7 @@ try {
   const tarballPath = path.join(profileDir, tarball)
   const target = path.join(profileDir, 'node_modules', '@kb1slnlabs', 'dsh-ponytail')
   fs.mkdirSync(target, { recursive: true })
-  execFileSync('tar', ['-xzf', tarballPath, '--strip-components=1', '-C', target], { stdio: 'pipe' })
+  execFileSync(process.platform === 'win32' ? path.join(process.env.SystemRoot, 'System32', 'tar.exe') : 'tar', ['-xzf', tarballPath, '--strip-components=1', '-C', target], { stdio: 'pipe' })
 
   // The tarball must contain the runtime surface AND no stray node_modules.
   for (const required of ['index.js', 'metrics.js', 'client.js', 'hooks/ponytail-instructions.js', 'hooks/ponytail-config.js', 'cordis.patch.yml', 'benchmarks/results/2026-10-07-agentic.md']) {
