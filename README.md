@@ -16,6 +16,21 @@ latest, alpha, and rc.3 daily, and future prereleases can still break APIs.
 
 ## Install
 
+### DSH Desktop — easiest
+
+On a DSH version whose Plugins sidebar offers **Add plugin** (supported Desktop
+versions): open **Plugins**, choose **Add plugin**, enter
+`@kb1slnlabs/dsh-ponytail@5.3.3-dsh.6`, then review/install and enable it when
+prompted. Fully quit DSH and reopen it, and create a new conversation.
+
+If you want a different default intensity, select `ultra` in the Ponytail settings;
+the package default is `full`. The exact location of those settings may vary by DSH
+version. If another Ponytail adapter is already installed, remove it first — see
+[Coming from another adapter](#coming-from-another-adapter).
+
+Desktop's UI installs into its own profile, so the terminal commands below are
+alternatives, not extra steps.
+
 The examples below install into a CLI-managed profile called `web`. They need the
 DSH 0.2.1-rc.3 CLI. If you use the desktop app, use its bundled CLI instead (see
 "Desktop app" below). Close any running DSH process after installing, then start it
