@@ -70,10 +70,10 @@ JavaScript, so `npm pack` needs no `npm install` first.
 **Option 4 — npm (recommended).** Installs the published package:
 
 ```powershell
-dsh plugin --profile web add @kb1slnlabs/dsh-ponytail
+dsh plugin --profile web add @kb1slnlabs/dsh-ponytail@5.3.3-dsh.6
 ```
 
-Append `@5.3.3-dsh.6` to pin this version.
+The example pins the release so an install does not pick up stale cached `latest` metadata.
 
 ### Desktop app
 
@@ -83,7 +83,7 @@ reserved `desktop` profile; the bundled one works. Use the bundled CLI with the
 
 ```powershell
 $dshDesktop = Join-Path $env:LOCALAPPDATA 'Programs\DeepSeek Harness\resources\runtime\cli\bin\dsh.cmd'
-& $dshDesktop plugin --profile desktop add @kb1slnlabs/dsh-ponytail
+& $dshDesktop plugin --profile desktop add @kb1slnlabs/dsh-ponytail@5.3.3-dsh.6
 ```
 
 On macOS the Desktop app's bundled CLI lives inside the application bundle:

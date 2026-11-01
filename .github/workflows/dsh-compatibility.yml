@@ -37,3 +37,18 @@ jobs:
       - name: npm test
         shell: bash
         run: npm test
+
+      - name: Install pnpm globally
+        if: matrix.dsh-version == 'latest'
+        shell: bash
+        run: npm install --global pnpm@11
+
+      - name: Fresh-install recommended packages and check peers
+        if: matrix.dsh-version == 'latest'
+        shell: bash
+        env:
+          DSH_HOME: ${{ runner.temp }}/dsh-clean-install
+        run: |
+          node "$DSH_ROOT/node_modules/@deepseek-ai/dsh/lib/bin.js" plugin --profile web add @kb1slnlabs/dsh-ponytail@5.3.3-dsh.6
+          node "$DSH_ROOT/node_modules/@deepseek-ai/dsh/lib/bin.js" plugin --profile web add https://github.com/KB1SLN-Labs/dsh-linear/releases/download/v0.2.5/kb1slnlabs-dsh-linear.tgz
+          pnpm --dir "$DSH_HOME/profiles/web" peers check
