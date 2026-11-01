@@ -1,0 +1,39 @@
+name: dsh-compatibility
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 6 * * *'
+
+jobs:
+  dsh-compatibility:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        dsh-version: ['0.2.1-rc.3', latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Install host DSH at the matrix version
+        shell: bash
+        run: |
+          npm install --prefix "$RUNNER_TEMP/dsh-host" --ignore-scripts --no-audit --no-fund "@deepseek-ai/dsh@${{ matrix.dsh-version }}"
+          echo "DSH_ROOT=$RUNNER_TEMP/dsh-host" >> "$GITHUB_ENV"
+
+      - name: Resolve expected exact host version
+        shell: bash
+        run: |
+          dsh_test_version=$(npm view "@deepseek-ai/dsh@${{ matrix.dsh-version }}" version)
+          echo "DSH_TEST_VERSION=$dsh_test_version" >> "$GITHUB_ENV"
+
+      - name: npm test
+        shell: bash
+        run: npm test

@@ -8,7 +8,11 @@ composer, and a usage dashboard.
 Upstream source: [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail)
 (MIT). This is an unofficial port, not affiliated with upstream.
 
-**Beta**, tested on Windows with DSH **0.2.1-rc.3**. Other platforms are untested.
+Beta. Host adapter and packaged-plugin tests pass on Windows with DSH 0.2.1-rc.3
+and rc.5; macOS Desktop UI is not yet verified.
+
+Compatibility peers allow DSH `>=0.2.1-rc.3` and `<0.3.0`. CI checks the current
+latest and rc.3 daily, and future prereleases can still break APIs.
 
 ## Install
 
@@ -38,7 +42,7 @@ Append `#<commit>` to pin a version.
 **Option 3 — Release tarball.** Download the packaged file and install it:
 
 ```powershell
-# https://github.com/KB1SLN-Labs/dsh-ponytail/releases/download/v5.3.3-dsh.5/kb1slnlabs-dsh-ponytail.tgz
+# https://github.com/KB1SLN-Labs/dsh-ponytail/releases/download/v5.3.3-dsh.6/kb1slnlabs-dsh-ponytail.tgz
 dsh plugin --profile web add file:./kb1slnlabs-dsh-ponytail.tgz
 ```
 
@@ -54,7 +58,7 @@ JavaScript, so `npm pack` needs no `npm install` first.
 dsh plugin --profile web add @kb1slnlabs/dsh-ponytail
 ```
 
-Append `@5.3.3-dsh.5` to pin this version.
+Append `@5.3.3-dsh.6` to pin this version.
 
 ### Desktop app
 
@@ -65,6 +69,12 @@ reserved `desktop` profile; the bundled one works. Use the bundled CLI with the
 ```powershell
 $dshDesktop = Join-Path $env:LOCALAPPDATA 'Programs\DeepSeek Harness\resources\runtime\cli\bin\dsh.cmd'
 & $dshDesktop plugin --profile desktop add @kb1slnlabs/dsh-ponytail
+```
+
+On macOS the Desktop app's bundled CLI lives inside the application bundle:
+
+```bash
+"/Applications/DeepSeek Harness.app/Contents/Resources/runtime/cli/bin/dsh" plugin --profile desktop add @kb1slnlabs/dsh-ponytail@5.3.3-dsh.6
 ```
 
 The bundled CLI supports the same alternate sources shown above — `github:`, a

@@ -21,7 +21,7 @@ import { pathToFileURL, fileURLToPath } from 'node:url'
 const here = path.dirname(fileURLToPath(import.meta.url))
 const pkgDir = path.join(here, '..')
 
-const REQUIRED_DSH_LLM_VERSION = '0.2.1-rc.3'
+const REQUIRED_DSH_LLM_VERSION = process.env.DSH_TEST_VERSION || '0.2.1-rc.3'
 
 function locateDshModules() {
   // DSH_ROOT is required and points at the DSH package directory (the parent

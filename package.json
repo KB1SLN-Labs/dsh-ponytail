@@ -1,6 +1,6 @@
 {
   "name": "@kb1slnlabs/dsh-ponytail",
-  "version": "5.3.3-dsh.5",
+  "version": "5.3.3-dsh.6",
   "description": "Ponytail 5.3.3 lazy senior dev mode for DeepSeek Harness: always-on minimal-code ruleset, per-session intensity switching, and the six upstream review/audit/debt/gain/help skills",
   "keywords": [
     "deepseek", "deepseek-harness", "dsh", "dsh-plugin", "ponytail",
@@ -67,10 +67,10 @@
   },
   "peerDependencies": {
     "@deepseek-ai/cordis": "~4.0.5",
-    "@deepseek-ai/dsh-commands": "0.2.1-rc.3",
-    "@deepseek-ai/dsh-llm": "0.2.1-rc.3",
-    "@deepseek-ai/dsh-skill": "0.2.1-rc.3",
-    "@deepseek-ai/dsh-system-prompt": "0.2.1-rc.3",
+    "@deepseek-ai/dsh-commands": ">=0.2.1-rc.3 <0.3.0",
+    "@deepseek-ai/dsh-llm": ">=0.2.1-rc.3 <0.3.0",
+    "@deepseek-ai/dsh-skill": ">=0.2.1-rc.3 <0.3.0",
+    "@deepseek-ai/dsh-system-prompt": ">=0.2.1-rc.3 <0.3.0",
     "@deepseek-ai/schemastery": "~3.18.5",
     "zod": "^4.4.3"
   },
