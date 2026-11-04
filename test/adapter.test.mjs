@@ -108,7 +108,8 @@ function readConfigValue(ref) {
 /** The live volatile references the fiber is running on, keyed by field name. */
 function liveConfigRefs(fiber) {
   const refs = {}
-  for (const [key, value] of Object.entries(fiber.config ?? {})) {
+  // cordis >= 4.0.6 keeps the raw input on fiber.config and the running config on fiber.effectiveConfig
+  for (const [key, value] of Object.entries(fiber.effectiveConfig ?? fiber.config ?? {})) {
     if (value && typeof value === 'object' && Symbol.for('cosmokit.volatile.write') in value) refs[key] = value
   }
   return refs
